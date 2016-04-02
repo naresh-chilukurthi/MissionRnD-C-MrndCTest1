@@ -1,5 +1,5 @@
 /*
-Given an array which has two arithmetic sequences and 
+Given an array which has two arithmetic sequences and
 one geometric sequence (in any order).
 Copy indexes where each sequence starts and ends into an Array and return it.
 
@@ -9,20 +9,20 @@ Ex : 1, 3, 5, 7, 2, 4, 8, 16 18 20, output is [0, 3, 7, 9, 4, 7]
 Ex : 1 ,2, 4, 8, 12, 16, 21, 26     output is [2, 5, 5, 7, 0, 3]
 Ex : 10 15 20 30 50 70 100 200 400 800  output is [0, 2, 3, 5, 6, 9]
 
-The final_arr[0], final_arr[1] values in final array  
+The final_arr[0], final_arr[1] values in final array
 will be start and end indexes of First A.P in the Original Array
 
-The final_arr[2], final_arr[3] values in final array  
-will be start and end indexes of Second A.P 
+The final_arr[2], final_arr[3] values in final array
+will be start and end indexes of Second A.P
 
-The final_arr[4], final_arr[5] values in final array  
+The final_arr[4], final_arr[5] values in final array
 will be start and end indexes of First  G.P (Only)
 
 Input: Array and Length of Array
 Output : New Array which has 6 integers , which denote the (start,end) indexes .
 
 Note : All elements in the array will be part of atleast 1 sequence .
-Two A.P cannot start at same index . 
+Two A.P cannot start at same index .
 
 Difficulty : Medium
 */
@@ -33,5 +33,60 @@ Difficulty : Medium
 
 int * find_sequences(int *arr, int len){
 	//Return final array which has 6indexes [AP1_S,AP1_E,AP2_S,AP2_E,GP1_S,GP2_E]
-	return NULL;
+	int i=0,k,flaga=0,index=0;
+	int ind1=5,counts=0,flag=0;
+    int *res=(int*)malloc(100);
+	int  *diff_array;float *div_array;int output[6];
+	int start=0,endi=0;
+	if(arr==NULL)
+        return NULL;
+else
+{
+
+
+	diff_array=(int*)malloc(sizeof(int)*len);
+	div_array=(float*)malloc(sizeof(float)*len);
+	for(i=0;i<len-1;i++)
+    {
+            diff_array[i]=arr[i+1]-arr[i];
+            div_array[i]=(float)arr[i+1]/arr[i];
+    }
+
+    while(index<6)
+    {
+        flaga==0;
+        for(k=0;k<len-1;k++)
+        {
+        if((diff_array[k]==diff_array[k+1])&&index<6&&i<len)
+           {
+
+               res[index]=k;index++;counts++;
+                while((diff_array[k]==diff_array[k+1])&&index<6&&i<len)
+                {
+                    k++;
+                }
+                res[index]=k+1;index++;
+
+           }
+           flaga=1;
+        }
+            for(k=0;k<len;k++)
+            {
+                if(div_array[k]==div_array[k+1])
+                {
+                    res[index]=k;index++;
+                    while(div_array[k]=div_array[k+1])
+                    {
+                        k++;
+                    }
+                    res[index]=k+1;index++;
+                    i=k+2;
+                    break;
+                }
+            }
+        }
+
+    return res;
+
+}
 }
